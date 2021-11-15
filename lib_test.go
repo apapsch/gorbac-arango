@@ -84,3 +84,55 @@ func TestSaveLoadRBAC(t *testing.T) {
 		t.Fatalf("only gandalf shall have pass permission, but foo has too")
 	}
 }
+
+const expectedCount = 1
+
+func TestSaveTwiceAddedOnce(t *testing.T) {
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	db, err := databaseForTest(ctx)
+	if err != nil {
+		t.Fatalf("arango test connection failed: %v", err)
+	}
+
+	err = CreateSchema(ctx, db)
+	if err != nil {
+		t.Fatalf("could not create schema: %v", err)
+	}
+
+	fooRole := gorbac.NewStdRole("foo")
+	fooRole.Assign(gorbac.NewStdPermission("bar"))
+
+	rbac := gorbac.New()
+	rbac.Add(fooRole)
+
+	err = SaveRBAC(ctx, db, rbac)
+	if err != nil {
+		t.Fatalf("could not save rbac: %v", err)
+	}
+
+	err = SaveRBAC(ctx, db, rbac)
+	if err != nil {
+		t.Fatalf("could not save rbac a second time: %v", err)
+	}
+
+	countedCollections := []string{
+		roleCollectionName,
+		permissionCollectionName,
+		rolePermEdgeCollectionName,
+	}
+	for _, collectionName := range countedCollections {
+		collection, err := db.Collection(ctx, collectionName)
+		if err != nil {
+			t.Fatalf("could not get collection %s: %v", collectionName, err)
+		}
+		count, err := collection.Count(ctx)
+		if err != nil {
+			t.Fatalf("could not count %s: %v", collectionName, err)
+		}
+		if count != expectedCount {
+			t.Fatalf("expected %s count %d, got %d", collectionName, expectedCount, count)
+		}
+	}
+}

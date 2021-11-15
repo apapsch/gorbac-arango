@@ -162,12 +162,21 @@ func SaveRBAC(ctx context.Context, db driver.Database, rbac *gorbac.RBAC) error 
 			if err != nil {
 				return err
 			}
-			_, err = collections.Edges.CreateDocument(ctx, map[string]string{
-				"_from": roleCollectionName + "/" + r.ID(),
-				"_to":   permissionCollectionName + "/" + p.ID(),
-			})
+
+			edgeKey := r.ID() + "-" + p.ID()
+			exists, err := collections.Edges.DocumentExists(ctx, edgeKey)
 			if err != nil {
 				return err
+			}
+			if !exists {
+				_, err = collections.Edges.CreateDocument(ctx, map[string]string{
+					"_key":  edgeKey,
+					"_from": roleCollectionName + "/" + r.ID(),
+					"_to":   permissionCollectionName + "/" + p.ID(),
+				})
+				if err != nil {
+					return err
+				}
 			}
 		}
 
