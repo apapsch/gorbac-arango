@@ -136,3 +136,44 @@ func TestSaveTwiceAddedOnce(t *testing.T) {
 		}
 	}
 }
+
+func TestLoadRoleWithoutPermissions(t *testing.T) {
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	db, err := databaseForTest(ctx)
+	if err != nil {
+		t.Fatalf("arango test connection failed: %v", err)
+	}
+
+	err = CreateSchema(ctx, db)
+	if err != nil {
+		t.Fatalf("could not create schema: %v", err)
+	}
+
+	fooRole := gorbac.NewStdRole("quux")
+
+	rbac := gorbac.New()
+	rbac.Add(fooRole)
+
+	err = SaveRBAC(ctx, db, rbac)
+	if err != nil {
+		t.Fatalf("could not save rbac: %v", err)
+	}
+
+	loaded, err := LoadRBAC(ctx, db)
+	if err != nil {
+		t.Fatalf("could not load rbac: %v", err)
+	}
+
+	found := false
+	err = gorbac.Walk(loaded, func(r gorbac.Role, p []string) error {
+		if r.ID() == fooRole.ID() {
+			found = true
+		}
+		return nil
+	})
+	if !found {
+		t.Fatalf("Walking RBAC structure did not include %s role", fooRole.ID())
+	}
+}

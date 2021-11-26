@@ -1,11 +1,11 @@
 FOR role IN gorbac_roles
 
 FOR perm
-IN 1..1 OUTBOUND role._id gorbac_roles_permissions
+IN 0..1 OUTBOUND role._id gorbac_roles_permissions
 
 COLLECT roleID = role._key INTO g
 
 RETURN {
     r: roleID,
-    p: g[*].perm._key,
+    p: SHIFT(g)[*].perm._key,
 }
