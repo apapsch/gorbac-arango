@@ -30,7 +30,7 @@ import (
 	"fmt"
 
 	driver "github.com/arangodb/go-driver"
-	"gopkg.in/mikespook/gorbac.v2"
+	"github.com/mikespook/gorbac/v2"
 )
 
 const (

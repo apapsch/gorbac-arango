@@ -11,6 +11,8 @@ github.com/golang-jwt/jwt v3.2.2+incompatible/go.mod h1:8pz2t5EyA70fFQQSrl6XZXzq
 github.com/google/uuid v1.1.1/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
 github.com/mikespook/gorbac v2.1.0+incompatible h1:otWotQcs8ehjzn6DBBj+lxRu9QOnE9a3Cp+/EMUpwhg=
 github.com/mikespook/gorbac v2.1.0+incompatible/go.mod h1:IZtfzfI4wPQxddP0qrFEzLJxM4BbT7c86I3j8I5rD/8=
+github.com/mikespook/gorbac/v2 v2.3.3 h1:KkNnd+6wygIEQqr+DdbBbwKKWSG4WDaoM7+3GWtOSWI=
+github.com/mikespook/gorbac/v2 v2.3.3/go.mod h1:+bacKCT8dn0LiED/VujL7DHg5g6hbQTcjnhkVeaZM5c=
 github.com/oklog/ulid v1.3.1 h1:EGfNDEx6MqHz8B3uNV6QAib1UR2Lm97sHi3ocA6ESJ4=
 github.com/oklog/ulid v1.3.1/go.mod h1:CirwcVhetQ6Lv90oh/F+FBtV6XMibvdAFo93nm5qn4U=
 github.com/pkg/errors v0.8.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
@@ -36,7 +38,5 @@ golang.org/x/text v0.3.0/go.mod h1:NqM8EUOU14njkJ3fqMW+pc6Ldnwhi/IjpwHt7yyuwOQ=
 golang.org/x/tools v0.0.0-20190828213141-aed303cbaa74/go.mod h1:b+2E5dAYhXwXZwtnZ6UAqBI28+e2cm9otk0dWdXHAEo=
 golang.org/x/xerrors v0.0.0-20190717185122-a985d3407aa7/go.mod h1:I/5z698sn9Ka8TeJc9MKroUUfqBBauWjQqLJ2OPfmY0=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
-gopkg.in/mikespook/gorbac.v2 v2.1.0 h1:0k0Bb9I/C/UWNnJRxPH5aMnXJ8q7TGVV0ppX9HBwJ9E=
-gopkg.in/mikespook/gorbac.v2 v2.1.0/go.mod h1:ufV8BiYVBb4A2kIPd7zltN19p8lnvN5a/PbLlOeJ/yM=
 gopkg.in/yaml.v2 v2.2.2 h1:ZCJp+EgiOT7lHqUV2J862kp8Qj64Jo6az82+3Td9dZw=
 gopkg.in/yaml.v2 v2.2.2/go.mod h1:hI93XBmqTisBFMUTm0b8Fm+jr3Dg1NNxqwp+5A1VGuI=

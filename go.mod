@@ -4,8 +4,8 @@ go 1.17
 
 require (
 	github.com/arangodb/go-driver v1.2.1
+	github.com/mikespook/gorbac/v2 v2.3.3
 	github.com/oklog/ulid v1.3.1
-	gopkg.in/mikespook/gorbac.v2 v2.1.0
 )
 
 require (

@@ -8,8 +8,8 @@ import (
 
 	"github.com/arangodb/go-driver"
 	arangohttp "github.com/arangodb/go-driver/http"
+	"github.com/mikespook/gorbac/v2"
 	"github.com/oklog/ulid"
-	"gopkg.in/mikespook/gorbac.v2"
 )
 
 func databaseForTest(ctx context.Context) (driver.Database, error) {
